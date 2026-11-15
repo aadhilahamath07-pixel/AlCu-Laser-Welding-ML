@@ -1,261 +1,199 @@
 # Aluminium–Copper Laser Welding: Data-Driven Weld Quality Prediction
 
 <p align="center">
-  <strong>An explainable, literature-informed machine-learning framework for studying process–structure–property relationships in dissimilar Al–Cu laser welding.</strong>
+  <strong>A traceable, literature-informed research workflow for analysing experimental Al–Cu laser-welding data and developing carefully validated weld-quality prediction models.</strong>
 </p>
 
 <p align="center">
   <a href="https://www.python.org/"><img src="https://img.shields.io/badge/Python-3.10%2B-3776AB?logo=python&logoColor=white" alt="Python 3.10+"/></a>
   <a href="https://scikit-learn.org/"><img src="https://img.shields.io/badge/ML-scikit--learn-F7931E?logo=scikitlearn&logoColor=white" alt="scikit-learn"/></a>
   <a href="LICENSE"><img src="https://img.shields.io/badge/License-MIT-green.svg" alt="MIT License"/></a>
-  <img src="https://img.shields.io/badge/Project-Research%20in%20progress-orange" alt="Research in progress"/>
+  <img src="https://img.shields.io/badge/Status-Data%20curation%20%2B%20EDA-orange" alt="Data curation and EDA"/>
 </p>
 
 ---
 
-## Overview
+## Project at a glance
 
-Aluminium and copper are widely used in electrical and energy systems, including electric-vehicle battery connections, busbars, power electronics and electrical terminals. Joining these dissimilar metals by laser welding is challenging because their thermophysical properties differ substantially. Process conditions can influence melting, mixing, dilution, porosity, cracking and the formation of brittle aluminium–copper intermetallic compounds (IMCs).
+**Research topic:** Data-Driven Prediction of Weld Quality in Aluminium–Copper Laser Welding.
 
-This project investigates whether experimental results reported in scientific literature can be assembled into a traceable dataset and used to develop machine-learning models for predicting selected weld-quality characteristics.
+This project builds a reproducible workflow around experimental data reported in published Al–Cu laser-welding studies. It focuses on preserving source provenance, standardising measured variables, auditing data quality, understanding differences between studies, and only then deciding whether predictive machine-learning models are scientifically defensible.
 
-The intended outcome is a **reproducible research workflow** connecting published process parameters to measured weld properties, with careful validation, model interpretation and (where justified by the data) process-window exploration.
+Aluminium and copper are difficult to join because of differences in melting behaviour, thermal conductivity, reflectivity and other thermophysical properties. Their interaction during laser welding can lead to unstable melt-pool behaviour, porosity, cracking, incomplete fusion and aluminium–copper intermetallic compounds (IMCs). Weld quality is therefore treated as multidimensional: geometry, mechanical behaviour, metallurgical features and electrical performance are distinct outcomes.
 
-> **Current status:** Literature review and dataset design. No trained model, validated prediction capability or optimized process window is claimed at this stage.
+> **Current project status (15 November 2026):** Four source datasets have been assembled into an 84-record traceable master table. Notebooks 01–06 cover inspection, cleaning, source-specific standardisation, master construction and quality control. Notebook 07 is the next analysis stage. No trained or validated predictive model is claimed yet.
 
-## Research questions
+## Current data inventory
 
-1. Which laser and joint parameters are most consistently reported in experimental Al–Cu laser-welding studies?
-2. How strongly are reported process conditions associated with mechanical, geometric, metallurgical and electrical weld outcomes?
-3. Can models trained on some publications predict results from a completely held-out publication?
-4. Which variables drive model predictions, and how stable are those explanations?
-5. If data coverage is sufficient, what trade-offs exist between strength, IMC formation, electrical resistance and defect-related outcomes?
+The current master dataset contains 84 records from four source groups:
 
-## Why Al–Cu laser welding is challenging
+| Source group | Records | Current content |
+|---|---:|---|
+| Conventional Al–Cu laser welding | 27 | 9 process combinations, 3 repeats each; bead width, interface width and penetration depth |
+| Al–Cu wobble laser welding | 36 | 18 process combinations, 2 repeats each; wobble settings, bead-width measures and penetration depth |
+| Shin et al. (2021) | 11 | Matched measured outcomes: tensile shear strength, electrical resistance and welding area |
+| Lee et al. (2022) | 10 | Reported force values and fracture-location descriptions, with source-table inconsistencies flagged |
+| **Total** | **84** | **Multiple studies and measurement systems; not one homogeneous modelling table** |
 
-Aluminium and copper differ in melting behaviour, thermal conductivity, reflectivity and density. These differences make the local thermal cycle and melt-pool behaviour sensitive to beam position, energy input, joint geometry and material thickness.
+### Quality-control findings
 
-A key metallurgical concern is the formation of Al–Cu intermetallic phases (for example, Al₂Cu and AlCu). Their amount, distribution and morphology depend on the thermal history and mixing conditions. Excessive or unfavourable IMC formation can contribute to brittle behaviour. Other reported weld-quality concerns include pores, cracks, unstable penetration and incomplete joining.
+The Notebook 06 audit of the exported QC dataset reported:
 
-The project therefore treats weld quality as **multi-dimensional** rather than reducing it to a single strength value.
+- 84 records and 45 columns in the QC master file.
+- 0 duplicate master IDs, 0 duplicate source-record keys and 0 exact duplicate rows.
+- 6 conventional records have all three geometry outputs equal to zero. They are retained in the master table and excluded from the default geometry-regression subsets pending physical interpretation.
+- 7 wobble records have missing bead-width measurements: 6 are annotated “Specimen cut” and 1 has no stated reason. Missing values remain missing.
+- 4 Lee 2022 force records are flagged for inconsistencies between reported minimum, maximum and/or average values. The force modelling subset is intentionally empty until the original table is verified.
+- The categorical field previously named `fracture_area_reported` has been renamed `fracture_location_reported`; values such as Al, Cu and Joint describe fracture location, not a numeric area.
 
-## End-to-end research workflow
+These are audit observations, not proof that every other measurement is error-free. Always preserve the original publication and check its tables before publication or modelling.
 
-~~~mermaid
+## Research objectives
+
+1. Assemble experimental Al–Cu laser-welding data with traceable publication and record identifiers.
+2. Describe how reported laser and joint parameters relate to measured weld outcomes within each source.
+3. Identify which targets have enough reliable observations and compatible definitions for modelling.
+4. Establish transparent baselines and compare suitable regression models.
+5. Evaluate generalisation across studies using study-grouped validation where the number of independent studies permits it.
+6. Interpret model behaviour cautiously and distinguish statistical association from physical causation.
+
+## Research workflow
+
+```mermaid
 flowchart TD
-    A[Identify peer-reviewed Al–Cu laser-welding studies] --> B[Screen papers and record metadata]
-    B --> C[Extract experimental conditions and measured outcomes]
-    C --> D[Normalize units and document uncertainty]
-    D --> E[Build source-traceable dataset]
-    E --> F[Exploratory data analysis]
-    F --> G[Define target-specific datasets]
-    G --> H[Train baseline and nonlinear ML models]
-    H --> I[Publication-grouped validation]
-    I --> J[Error analysis and explainability]
-    J --> K{Enough comparable data?}
-    K -- Yes --> L[Uncertainty-aware process-window exploration]
-    K -- No --> M[Report evidence gaps and data limitations]
-    L --> N[Research report and reproducible outputs]
+    A[Identify and screen literature] --> B[Inspect source files and tables]
+    B --> C[Clean and standardise each source separately]
+    C --> D[Build source-traceable master dataset]
+    D --> E[Quality-control audit and target eligibility]
+    E --> F[Exploratory data analysis by source]
+    F --> G[Assess target coverage and study comparability]
+    G --> H[Baseline and candidate ML models]
+    H --> I[Study-grouped validation and error analysis]
+    I --> J[Interpretation and uncertainty]
+    J --> K{Evidence sufficient?}
+    K -->|Yes| L[Careful process-window exploration]
+    K -->|No| M[Document evidence gaps and limitations]
+    L --> N[Reproducible report and manuscript]
     M --> N
-~~~
+```
 
-## Candidate input features
+## Notebooks and execution order
 
-The final feature set will depend on what the source papers report with sufficient consistency. Missing values will be documented; values will not be invented to fill gaps.
+Run the notebooks in order. The Colab links open the notebooks from the repository; sign in to Colab with the Google account you intend to use before opening them.
 
-| Feature group | Candidate variables | Notes |
+| Notebook | Purpose | Link |
 |---|---|---|
-| Laser settings | Laser power (W), welding speed (mm/s) | Record actual reported values and laser mode |
-| Beam configuration | Beam offset (mm), focal position, beam diameter (mm), wobble settings | Definitions and sign conventions must be checked per paper |
-| Materials | Aluminium grade, copper grade, temper/condition | Preserve the source designation |
-| Joint geometry | Lap/butt configuration, sheet thicknesses (mm), overlap/gap | Geometry can strongly affect heat flow |
-| Process environment | Shielding gas, filler, welding direction, laser source | Include when reported |
-| Derived descriptors | Nominal line energy, thickness ratio, nominal power density | Calculate only when definitions and units are compatible |
+| 01 | Inspect original data files and workbook structure | [Open in Colab](https://colab.research.google.com/github/aadhilahamath07-pixel/AlCu-Laser-Welding-ML/blob/main/notebooks/01_data_inspection.ipynb) |
+| 02 | Clean and standardise conventional welding data | [Open in Colab](https://colab.research.google.com/github/aadhilahamath07-pixel/AlCu-Laser-Welding-ML/blob/main/notebooks/02_conventional_data_cleaning.ipynb) |
+| 03 | Build the conventional dataset | [Open in Colab](https://colab.research.google.com/github/aadhilahamath07-pixel/AlCu-Laser-Welding-ML/blob/main/notebooks/03_build_conventional_dataset.ipynb) |
+| 04 | Build the wobble-welding dataset | [Open in Colab](https://colab.research.google.com/github/aadhilahamath07-pixel/AlCu-Laser-Welding-ML/blob/main/notebooks/04_build_wobbling_dataset.ipynb) |
+| 05 | Combine source records into a traceable master dataset | [Open in Colab](https://colab.research.google.com/github/aadhilahamath07-pixel/AlCu-Laser-Welding-ML/blob/main/notebooks/05_build_master_experimental_dataset.ipynb) |
+| 06 | Audit the master dataset and create target-specific eligibility subsets | [Open in Colab](https://colab.research.google.com/github/aadhilahamath07-pixel/AlCu-Laser-Welding-ML/blob/main/notebooks/06_master_dataset_quality_control.ipynb) |
+| 07 | Explore distributions, process–response relationships and source-specific correlations | [Open in Colab](https://colab.research.google.com/github/aadhilahamath07-pixel/AlCu-Laser-Welding-ML/blob/main/notebooks/07_exploratory_data_analysis.ipynb) |
 
-A commonly used nominal line-energy descriptor is:
+Notebook outputs are generated in the Colab runtime and downloaded when instructed. They are not automatically committed to GitHub. Store approved, documented outputs in the appropriate repository folder when ready.
 
-$$
-E_l = \frac{P}{v}
-$$
+## Candidate process inputs
 
-where P is laser power in watts and v is travel speed in mm/s, giving J/mm. This is a simplified descriptor—not the absorbed heat input—because it does not account for absorptivity, beam distribution, interaction time or heat losses.
+The final features depend on what each paper actually reports. Candidate variables include:
 
-Derived variables will be checked for redundancy with their source variables to avoid giving models duplicate information.
+- Laser power (W) and welding/travel speed (mm/s).
+- Wobbling/tangential speed and wobbling diameter or amplitude.
+- Beam offset, focus position, beam diameter and laser mode.
+- Aluminium and copper grades, tempers and thicknesses.
+- Upper-sheet material, joint type, overlap/gap and welding direction.
+- Shielding gas, filler material and process environment.
+
+A nominal line-energy descriptor may be calculated as (E_l=P/v) when power and travel speed are correctly defined and use compatible units. It is not absorbed heat input: absorptivity, beam distribution, interaction time and heat losses are not represented by this ratio. Derived variables must be checked for redundancy with their source variables.
 
 ## Candidate prediction targets
 
-Different publications measure different outcomes. Models will therefore be developed for individual targets or compatible target groups rather than assuming every paper reports every property.
+Targets are not interchangeable across papers. Examples include:
 
-| Outcome family | Candidate targets |
-|---|---|
-| Mechanical | Tensile strength, maximum load, shear strength, elongation, fracture mode |
-| Weld geometry | Weld width, penetration depth, fusion-zone dimensions |
-| Metallurgical | IMC layer thickness, phase identification, microhardness |
-| Electrical | Joint/contact resistance or resistivity, with test conditions recorded |
-| Defects | Porosity, crack presence, lack of fusion, defect area/fraction |
+- **Geometry:** face/bead width, interface width, penetration depth and fusion-zone dimensions.
+- **Mechanical:** tensile strength, tensile-shear strength, maximum load, elongation and fracture mode.
+- **Metallurgical:** IMC thickness, phase information and microhardness.
+- **Electrical:** joint resistance or resistivity with test conditions retained.
+- **Defects:** porosity, cracks, lack of fusion and defect area/fraction.
 
-Target definitions, units, specimen geometry and test standards must be retained. Measurements that are not directly comparable will not be silently combined.
+A target should only be modelled when its definition, unit, test method and source coverage are sufficiently clear.
 
-## Data collection and quality controls
+## Data integrity and modelling rules
 
-Each observation should be traceable to its source publication and, where possible, to a specific figure, table or experimental condition.
-
-Recommended metadata include:
-
-- Publication title, authors, year, DOI or stable URL
-- Figure/table/page used for extraction
-- Experimental versus numerical/simulated origin
-- Material grades, thicknesses and joint configuration
-- Original value, original unit and normalized value
-- Measurement/test method and specimen details
-- Extraction method (reported table, digitized plot, supplementary file)
-- Any assumptions, ambiguity or extraction uncertainty
-
-**Experimental and simulated results will be labelled separately.** They will not be pooled as if they were equivalent without a deliberate, documented analysis.
-
-For plot-digitized values, the source figure and estimated digitization uncertainty should be recorded. Duplicate conditions and repeated specimens should be identified rather than treated as independent observations without justification.
-
-See [data/README.md](data/README.md) for the proposed data dictionary and handling rules.
-
-## Machine-learning strategy
-
-The initial modelling plan is deliberately staged:
-
-| Model | Role |
-|---|---|
-| Mean/median predictor | Simple reference baseline |
-| Linear Regression / Ridge | Interpretable linear baseline |
-| Polynomial Regression | Test selected nonlinear trends |
-| Random Forest Regressor | Nonlinear ensemble baseline |
-| Support Vector Regression | Kernel-based regression |
-| Gradient boosting / XGBoost | Higher-capacity tabular model, if dataset size supports it |
-
-An artificial neural network may be considered only if the amount and diversity of data justify its additional complexity. A more complex algorithm will not be treated as better unless it performs better on suitable held-out data.
-
-### Validation designed for literature-derived data
-
-Randomly splitting individual rows can produce overly optimistic results when many rows originate from the same paper or experimental campaign. The preferred evaluation is therefore **grouped by publication/study**:
-
-- Keep all observations from a publication in the same fold.
-- Use grouped cross-validation where the number of studies permits it.
-- Reserve one or more studies for a final external-style test when feasible.
-- Fit preprocessing and feature selection only within each training fold.
-- Report the number of papers and observations in every split.
-
-Metrics will include R², MAE and RMSE, with units and sample counts reported. Performance will be interpreted in light of dataset size, target range and between-study differences.
-
-## Explainability, uncertainty and optimization
-
-- **Explainability:** permutation importance and SHAP may be used to inspect model behaviour. These describe model associations; they do not establish physical causation.
-- **Uncertainty:** bootstrap or other suitable uncertainty methods may be evaluated when data quantity and structure allow.
-- **Optimization:** multi-objective exploration may be attempted only after validation is credible. Objectives could include increasing strength while reducing resistance, excessive IMC thickness or defect indicators.
-- **Domain checks:** recommendations must remain within the observed and defensible data range. Extrapolated settings will be flagged rather than presented as reliable recommendations.
-
-## Technology
-
-- Python 3.10+
-- pandas and NumPy for data handling
-- Matplotlib and Seaborn for exploratory plots
-- scikit-learn for preprocessing, validation and baseline models
-- XGBoost (optional) for gradient boosting
-- SHAP (optional) for model interpretation
-- Jupyter for research notebooks
-- Streamlit (later stage) for a proof-of-concept interface
+1. Keep raw source files unchanged and preserve record-level provenance.
+2. Preserve original values and units; document every conversion.
+3. Never replace an unknown value with zero or silently impute missing measurements.
+4. Retain questionable observations with explicit flags until their source meaning is resolved.
+5. Do not pool conventional, wobble, Shin and Lee records just because some column names appear similar.
+6. Treat repeated specimens and repeated process conditions appropriately; do not count replicates as independent studies.
+7. Fit imputers, scalers, feature selection and other preprocessing inside each training fold.
+8. Prefer validation grouped by publication/study to reduce leakage. If too few independent studies exist, report that limitation instead of claiming external generalisation.
+9. Report MAE, RMSE and R² with target units, sample counts and split design. R² can be unstable or uninformative on very small test sets.
+10. Feature importance and SHAP explain model associations; they do not prove physical causation.
 
 ## Repository structure
 
-The repository will grow as the research progresses. The planned organization is:
-
-~~~text
+```text
 AlCu-Laser-Welding-ML/
 ├── data/
-│   ├── raw/                 # Source-derived files; check reuse permissions
-│   ├── processed/           # Cleaned, analysis-ready data
-│   └── README.md            # Data dictionary and provenance rules
-├── literature/              # Paper register and review notes
-├── notebooks/               # Ordered, reproducible research notebooks
-├── src/                     # Reusable data and modelling code
-├── models/                  # Saved model artifacts (when appropriate)
-├── results/
-│   ├── figures/
-│   └── metrics/
-├── app/                     # Optional Streamlit demonstration
+│   ├── raw/                 # Original source-derived files
+│   ├── processed/           # Standardised source-level data
+│   ├── master/              # Consolidated master outputs
+│   └── README.md            # Data dictionary, provenance and QC notes
+├── notebooks/               # Ordered Colab/Jupyter workflow (01–07)
+├── src/                     # Reusable Python functions (to be developed)
+├── results/                  # Approved figures, tables and metrics (future)
 ├── requirements.txt
 ├── LICENSE
 └── README.md
-~~~
+```
 
-Large datasets, licensed publisher content and raw paper PDFs should not be committed unless redistribution is permitted. The repository should store source references and derived data only in accordance with the relevant publication and data-use terms.
+## Getting started locally
 
-## Getting started
+```bash
+git clone https://github.com/aadhilahamath07-pixel/AlCu-Laser-Welding-ML.git
+cd AlCu-Laser-Welding-ML
+python -m venv .venv
+```
 
-1. Clone the repository:
+Activate the environment, then install dependencies:
 
-   ~~~bash
-   git clone https://github.com/aadhilahamath07-pixel/AlCu-Laser-Welding-ML.git
-   cd AlCu-Laser-Welding-ML
-   ~~~
+```bash
+# Windows PowerShell
+.venv\Scripts\Activate.ps1
 
-2. Create a virtual environment:
+# macOS / Linux
+source .venv/bin/activate
 
-   ~~~bash
-   python -m venv .venv
-   ~~~
+pip install -r requirements.txt
+```
 
-3. Activate it:
+Google Colab can also run the notebooks without a local installation.
 
-   **Windows PowerShell**
-   ~~~powershell
-   .venv\Scripts\Activate.ps1
-   ~~~
+## References currently represented in the dataset
 
-   **macOS / Linux**
-   ~~~bash
-   source .venv/bin/activate
-   ~~~
+- Shin et al. (2021), *Metals*, DOI: [10.3390/met11050831](https://doi.org/10.3390/met11050831).
+- Lee et al. (2022), *Metals*, DOI: [10.3390/met12111957](https://doi.org/10.3390/met12111957).
+- Additional conventional and wobble-welding source datasets are recorded in `data/raw/`; see the source workbook metadata and the data documentation before citing or redistributing them.
 
-4. Install dependencies:
+## GitHub repository About description
 
-   ~~~bash
-   pip install -r requirements.txt
-   ~~~
+Suggested short description:
 
-5. Begin with the literature register and data dictionary before fitting any models.
+> Literature-derived experimental datasets and reproducible analysis for data-driven weld-quality research in aluminium–copper laser welding.
 
-## Research milestones
+Suggested topics: `laser-welding`, `aluminium-copper`, `machine-learning`, `materials-science`, `weld-quality`, `data-analysis`.
 
-- [ ] Complete a focused literature search and screening protocol
-- [ ] Build a publication register with DOI and experimental details
-- [ ] Define a consistent data dictionary and unit-conversion rules
-- [ ] Extract and quality-check experimental observations
-- [ ] Perform exploratory data analysis and assess target coverage
-- [ ] Establish simple baseline models
-- [ ] Implement publication-grouped validation
-- [ ] Compare suitable models and analyse prediction errors
-- [ ] Evaluate explainability and uncertainty
-- [ ] Explore process trade-offs if evidence supports it
-- [ ] Prepare a reproducible report and manuscript
+The repository About description and topics are repository settings; update them in GitHub's **About → Edit repository details** panel if they are not already set.
 
-## Responsible use and limitations
+## Responsible use, licensing and limitations
 
-This is a research project, not a certified welding procedure or industrial process-control system. Literature datasets may be small, heterogeneous and biased toward particular materials, joint designs or experimental setups. Reported values may use different test methods and definitions.
+This is an academic research workflow, not a qualified welding procedure, industrial process-control system or certified engineering recommendation. The current dataset is small and heterogeneous. No predictive accuracy, causal relationship or optimum welding condition is claimed. Any future model must state its training domain, independent study count, uncertainty and limitations, and must be checked against physical experiments and relevant engineering standards.
 
-Predictions are exploratory estimates and must not replace physical validation, engineering review or applicable qualification standards. Any future model or application must communicate its training range, uncertainty and limitations.
-
-## References
-
-A verified bibliography will be maintained as papers are screened and included. Each dataset record should point to its source publication and exact extraction location. Do not add unverified citations or redistribute copyrighted figures and full-text papers.
-
-## Contributing
-
-Research-oriented contributions are welcome. Please document the source and extraction method for any proposed data addition, preserve original units, and explain any transformations. Code contributions should include reproducible examples and tests where practical.
-
-## License
-
-The original code in this repository is released under the MIT License. This does **not** grant permission to redistribute third-party papers, figures, tables or datasets. Those materials remain subject to their own copyright and licensing terms; see [LICENSE](LICENSE).
+The MIT License applies to original code in this repository. It does not grant permission to redistribute third-party papers, figures, tables or datasets. Check source-specific reuse terms before sharing extracted data.
 
 ---
 
 <p align="center">
-  <strong>Materials Science × Laser Processing × Explainable Machine Learning</strong>
+  <strong>Materials Science × Laser Processing × Reproducible Data Science</strong>
 </p>
