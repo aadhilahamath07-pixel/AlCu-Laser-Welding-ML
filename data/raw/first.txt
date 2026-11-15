@@ -1,0 +1,95 @@
+Table 1.
+Experimental conditions for the laser welding of Al ribbon to Cu sheet. The Al/Cu joints were only achieved for the experimental conditions of the named specimens.
+Number	Specimen	Laser Power (W)	Scan Speed (mm/s)	Heat Input (J/mm)
+1	-	1800	20	90
+2	-	2100	10	210
+3	-	2100	15.4	136.5
+4	-	2100	20	105
+5	-	2200	20	110
+6	-	2300	10	172.5
+7	-	2300	13.3	172.5
+8	23/20	2300	20	115
+9	23/28.6	2300	28.6	80.5
+10	-	2500	10	250
+11	-	2500	13.3	187.5
+12	25/15.4	2500	15.4	162.5
+13	25/20	2500	20	125
+14	25/28.6	2500	28.6	87.5
+15	25/40	2500	40	62.5
+16	27/20	2700	20	135
+17	27/28.6	2700	28.6	94.5
+18	27/40	2700	40	67.5
+19	29/20	2900	20	145
+20	29/40	2900	40	72.5
+21	-	3000	20	150
+
+
+Table 2.
+Nomenclatures and material properties used in the numerical simulation.
+Symbol	Nomenclature	Symbol	Nomenclature
+𝜌	Density (2.8 g/cm3)	P	Pressure on the free surface boundary
+→
+𝑉
+Velocity vector	𝑅𝑐	Radius of the surface curvature
+𝜈	Kinematic viscosity (0.013 gm/cm/s)	𝛾⁡(𝑇)	Surface tension
+𝑓𝑏	Body force	𝛾0
+𝑚	Surface tension at the melting temperature, 1000 dyne/cm
+ℎ	Enthalpy	𝑇	Material temperature
+.
+ℎ𝑠
+Enthalpy source of droplet	𝜂𝑙⁢𝑎⁢𝑠⁢𝑒⁢𝑟	Laser heat efficiency, 0.075
+𝑘	Thermal conductivity
+Al: 1.87 × 107 erg/s/cm/L
+Cu: 3.37 × 107 erg/s/cm/L	𝑃𝐿	Laser power (W)
+𝐶𝑝	Specific heat
+1.093 × 107 erg/gm/L	𝐴	Surface tension gradient
+Negative: −0.3 dyne/cm/T
+Positive: 0.3 dyne/cm/T
+ℎ𝑠	Enthalpy of solid	𝜎𝑟	Laser beam radius
+ℎ𝑠⁢𝑙	Enthalpy between solid and liquid
+3.89 × 109 cm2 /s2	𝑞𝑙⁢𝑎⁢𝑠⁢𝑒⁢𝑟	Heat input from laser
+𝑇𝑠	Solidus temperature, 850 K	𝑞𝑐⁢𝑜⁢𝑛⁢𝑣	Heat loss from convection
+𝑇𝑙	Liquidus temperature, 775 K	𝑞𝑟⁢𝑎⁢𝑑⁢𝑖	Heat loss from radiation
+→
+𝑛
+Normal vector to free surface	𝑞𝑒⁢𝑣⁢𝑎⁢𝑝	Heat loss from evaporation
+
+
+Table 3.
+Formed intermetallic compounds during the dissimilar Al/Cu laser welding.
+Specimen	Intermetallic Compounds
+23/20	AlCu2, Al8Cu, AlCu8
+25/28.6	Al2Cu, Al4Cu9, Al13Cu, Al9Cu11
+25/15.4	Al2Cu3, Al3Cu2, AlCu3, Al3Cu, AlCu, Al8Cu
+27/20	Al2Cu3, AlCu2, AlCu3, AlCu7, AlCu
+
+
+
+Close
+Table 4.
+Details of the numerical simulation.
+Case	Laser Power (W)	Scan Speed (mm/s)	Surface Tension at Melting Temperature (dyne/cm)	Surface Tension Gradient (dyne/cm/K)
+1	2300	20	1000	−0.2
+2	2500	15.4	1000	−0.2
+3	2500	15.4	1000	0.2
+4	2500	15.4	-	-
+
+
+
+Table 5.
+Results of the tensile shear strength, electrical resistance, and welding area for the different Al/Cu joints.
+Specimens	Tensile Shear Strength (MPa)	Electrical
+Resistance (μΩ)	Welding Area (mm2)
+23/20	33.4	0.278	0.140
+23/28.6	32.8	0.262	0.132
+25/15.4	26.7	0.328	0.208
+25/20	32.8	0.309	0.165
+25/28.6	33.3	0.285	0.146
+25/40	32.7	0.261	0.129
+27/20	21.5	0.346	0.233
+27/28.6	33.7	0.300	0.156
+27/40	32.8	0.280	0.141
+29/20	16	0.372	0.248
+29/40	21.7	0.291	0.155
+
+
