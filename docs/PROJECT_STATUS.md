@@ -15,6 +15,7 @@
 - First wobble-welding ML comparison completed using 29 complete records from 17 process conditions.
 - Initial results documented in [INITIAL_WOBBLING_MODEL_RESULTS.md](INITIAL_WOBBLING_MODEL_RESULTS.md).
 - Notebook 08 added for fold-wise stability checks and out-of-fold diagnostics.
+- Notebook 09 added for source-specific conventional laser-welding regression using leave-one-process-condition-out validation across the seven eligible power–speed conditions.
 
 ## Current dataset composition
 
@@ -74,9 +75,9 @@ Five-fold GroupKFold validation grouped rows by process condition. Pooled out-of
 
 ## Next research actions
 
-1. Re-run the updated Notebook 07 so the exported EDA tables include eligibility-aware correlations and target distribution/concentration audits.\n2. Complete fold-wise performance and residual diagnostics with Notebook 08.
-3. Decide whether face bead width performance is sufficiently stable to retain as an exploratory model.
-4. Review data coverage and comparable target availability in the conventional dataset before selecting a second source-specific modelling experiment.
+1. Re-run the updated Notebook 07 so the exported EDA tables include eligibility-aware correlations and target distribution/concentration audits.\n2. Run Notebook 09 on the conventional standardized dataset and review fold-wise and pooled out-of-fold metrics for all three geometry targets.
+3. Compare the conventional results with the wobble results only as separate source-specific experiments; do not pool the datasets.
+4. Decide whether either source has sufficiently stable predictive performance to retain as an exploratory model.
 5. Do not pool different source groups without verifying material grades, thicknesses, joint configuration, laser setup and measurement definitions.
 6. Improve source metadata and record exact publication table/page locations before manuscript preparation.
 
