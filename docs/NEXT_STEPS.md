@@ -3,7 +3,7 @@
 **Updated:** 16 November 2026  
 **Repository:** [AlCu-Laser-Welding-ML](https://github.com/aadhilahamath07-pixel/AlCu-Laser-Welding-ML)
 
-This checklist distinguishes completed analysis from files that are not yet archived in GitHub. Do not mark a data-archiving task complete until the actual file is present in the repository and its provenance has been checked.
+The repository folder structure and upload instructions for processed data, master data and results are now established. This checklist distinguishes completed analysis from data files that are still not archived in GitHub. Do not mark a data-archiving task complete until the actual file is present in the repository and its provenance has been checked.
 
 ## A. Archive the existing work
 
