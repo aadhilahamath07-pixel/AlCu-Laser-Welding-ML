@@ -89,8 +89,8 @@ Run the notebooks in order. The Colab links open the notebooks from the reposito
 | 04 | Build the wobble-welding dataset | [Open in Colab](https://colab.research.google.com/github/aadhilahamath07-pixel/AlCu-Laser-Welding-ML/blob/main/notebooks/04_build_wobbling_dataset.ipynb) |
 | 05 | Combine source records into a traceable master dataset | [Open in Colab](https://colab.research.google.com/github/aadhilahamath07-pixel/AlCu-Laser-Welding-ML/blob/main/notebooks/05_build_master_experimental_dataset.ipynb) |
 | 06 | Audit the master dataset and create target-specific eligibility subsets | [Open in Colab](https://colab.research.google.com/github/aadhilahamath07-pixel/AlCu-Laser-Welding-ML/blob/main/notebooks/06_master_dataset_quality_control.ipynb) |
-| 07 | Explore source-specific distributions, eligibility-aware correlations and target-value concentration | [Open in Colab](https://colab.research.google.com/github/aadhilahamath07-pixel/AlCu-Laser-Welding-ML/blob/main/notebooks/07_exploratory_data_analysis.ipynb) |
-| 08 | Evaluate wobble-welding models with grouped cross-validation, fold diagnostics and out-of-fold plots | [Open in Colab](https://colab.research.google.com/github/aadhilahamath07-pixel/AlCu-Laser-Welding-ML/blob/main/notebooks/08_grouped_ml_evaluation.ipynb) |
+| 07 | Explore source-specific distributions, eligibility-aware correlations, target-value concentration and export the wobble ML subset | [Open in Colab](https://colab.research.google.com/github/aadhilahamath07-pixel/AlCu-Laser-Welding-ML/blob/main/notebooks/07_exploratory_data_analysis.ipynb) |
+| 08 | Evaluate the Notebook 07 wobble subset with grouped cross-validation, fold diagnostics and out-of-fold plots | [Open in Colab](https://colab.research.google.com/github/aadhilahamath07-pixel/AlCu-Laser-Welding-ML/blob/main/notebooks/08_grouped_ml_evaluation.ipynb) |
 
 Notebook outputs are generated in the Colab runtime and downloaded when instructed. They are not automatically committed to GitHub. Store approved, documented outputs in the appropriate repository folder when ready.
 
