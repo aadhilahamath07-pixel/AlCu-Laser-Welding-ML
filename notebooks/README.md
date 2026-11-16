@@ -23,7 +23,8 @@ Run notebooks in numerical order. The notebooks are designed for Google Colab an
 - [05 – Build master dataset](https://colab.research.google.com/github/aadhilahamath07-pixel/AlCu-Laser-Welding-ML/blob/main/notebooks/05_build_master_experimental_dataset.ipynb)
 - [06 – Master QC](https://colab.research.google.com/github/aadhilahamath07-pixel/AlCu-Laser-Welding-ML/blob/main/notebooks/06_master_dataset_quality_control.ipynb)
 - [07 – Exploratory data analysis](https://colab.research.google.com/github/aadhilahamath07-pixel/AlCu-Laser-Welding-ML/blob/main/notebooks/07_exploratory_data_analysis.ipynb)
-- [08 – Grouped ML evaluation](https://colab.research.google.com/github/aadhilahamath07-pixel/AlCu-Laser-Welding-ML/blob/main/notebooks/08_grouped_ml_evaluation.ipynb)
+- [08 – Wobble grouped ML evaluation](https://colab.research.google.com/github/aadhilahamath07-pixel/AlCu-Laser-Welding-ML/blob/main/notebooks/08_grouped_ml_evaluation.ipynb)
+- [09 – Conventional grouped ML evaluation](https://colab.research.google.com/github/aadhilahamath07-pixel/AlCu-Laser-Welding-ML/blob/main/notebooks/09_conventional_grouped_ml_evaluation.ipynb)
 
 ## Execution notes
 
