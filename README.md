@@ -93,7 +93,7 @@ Run the notebooks in order. The Colab links open the notebooks from the reposito
 | 08 | Evaluate the Notebook 07 wobble subset with grouped cross-validation, fold diagnostics and out-of-fold plots | [Open in Colab](https://colab.research.google.com/github/aadhilahamath07-pixel/AlCu-Laser-Welding-ML/blob/main/notebooks/08_grouped_ml_evaluation.ipynb) |
 | 09 | Evaluate conventional bead width, interface width and penetration depth with leave-one-process-condition-out validation | [Open in Colab](https://colab.research.google.com/github/aadhilahamath07-pixel/AlCu-Laser-Welding-ML/blob/main/notebooks/09_conventional_grouped_ml_evaluation.ipynb) |
 
-Notebook outputs are generated in the Colab runtime and downloaded when instructed. They are not automatically committed to GitHub. Store approved, documented outputs in the appropriate repository folder when ready.
+Notebook outputs are generated in the Colab runtime and downloaded when instructed. They are not automatically committed to GitHub. **Repository storage check (16 November 2026):** the original source files are committed under `data/raw/`, but `data/processed/` and `data/master/` currently contain only `.gitkeep` placeholders. The 84-record master dataset and standardised CSVs have been generated and analysed in the Colab workflow, but are not yet committed to this repository. The Notebook 08 and Notebook 09 ZIP outputs are also not committed. This distinction is important: the current repository contains the source files, reproducible notebooks and analysis reports, but not yet a self-contained copy of every generated dataset and prediction output. See [data storage and provenance notes](data/README.md) and the [next-step checklist](docs/NEXT_STEPS.md).
 
 ## Candidate process inputs
 
@@ -182,7 +182,7 @@ Google Colab can also run the notebooks without a local installation.
 
 Suggested short description:
 
-> Literature-derived experimental datasets and reproducible analysis for data-driven weld-quality research in aluminium–copper laser welding.
+> Reproducible analysis of literature-derived experimental data for exploratory weld-quality prediction in aluminium–copper laser welding.
 
 Suggested topics: `laser-welding`, `aluminium-copper`, `machine-learning`, `materials-science`, `weld-quality`, `data-analysis`.
 
@@ -194,7 +194,7 @@ This is an academic research workflow, not a qualified welding procedure, indust
 
 The MIT License applies to original code in this repository. It does not grant permission to redistribute third-party papers, figures, tables or datasets. Check source-specific reuse terms before sharing extracted data.
 
-The current modelling results are preliminary: the conventional analysis has only seven independent process conditions and the wobble analysis has 17. Fold-level R² is unstable, and neither experiment provides external validation across independent studies. The next priority is to verify flagged source records, expand comparable experimental data and improve metadata before final model selection or manuscript claims.
+The current modelling results are preliminary: the conventional analysis has only seven independent process conditions and the wobble analysis has 17. Fold-level R² is unstable, and neither experiment provides external validation across independent studies. The next priority is to verify flagged source records, expand comparable experimental data and improve metadata before final model selection or manuscript claims. The generated master and processed CSV files still need to be reviewed for provenance/licensing and added to the repository (or a documented archival location) so that the research workflow is fully reproducible.
 
 ---
 
