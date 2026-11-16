@@ -10,7 +10,7 @@ Run notebooks in numerical order. The notebooks are designed for Google Colab an
 | 04 | Wobble dataset build | `alcu_wobbling_welding_standardized.csv` |
 | 05 | Master construction | `master_experimental_dataset.csv` and audit/data dictionary files |
 | 06 | Master quality control | `master_experimental_dataset_qc.csv`, QC reports and target-specific subsets |
-| 07 | Exploratory data analysis | Source-specific EDA, eligibility-aware correlations, target value/concentration audit, repeat summaries and ZIP export |
+| 07 | Exploratory data analysis | Source-specific EDA, eligibility-aware correlations, target value/concentration audit, repeat summaries, `wobbling_ml_dataset.csv` and ZIP export |
 | 08 | Grouped ML evaluation | Fold-wise metrics, pooled out-of-fold metrics, observed-vs-predicted and residual plots |
 
 ## Colab links
@@ -29,6 +29,6 @@ Run notebooks in numerical order. The notebooks are designed for Google Colab an
 - Sign in to the intended Google account before opening Colab.
 - Notebook outputs are not automatically committed to GitHub.
 - Notebook 06 expects the master CSV produced by Notebook 05.
-- Notebook 07 expects the audited `master_experimental_dataset_qc.csv` produced by Notebook 06. Its target-specific summaries, scatter plots and process–response correlations apply the relevant eligibility flags. The target audit reports valid, missing and eligibility-excluded counts separately; it also highlights highly concentrated values for source review.
+- Notebook 07 expects the audited `master_experimental_dataset_qc.csv` produced by Notebook 06. It applies target-specific eligibility to summaries, plots and correlations, audits concentrated values, and creates `wobbling_ml_dataset.csv` from records eligible for both wobble bead-width targets. The CSV is also included in the Notebook 07 output ZIP and is the input to Notebook 08.
 - Notebook 08 expects `wobbling_ml_dataset.csv`, generated during the initial wobble ML preparation. It can be uploaded when prompted.
 - Keep downloaded outputs with their source and notebook version; do not overwrite raw data.
