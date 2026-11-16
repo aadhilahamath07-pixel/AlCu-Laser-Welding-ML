@@ -21,7 +21,7 @@ This project builds a reproducible workflow around experimental data reported in
 
 Aluminium and copper are difficult to join because of differences in melting behaviour, thermal conductivity, reflectivity and other thermophysical properties. Their interaction during laser welding can lead to unstable melt-pool behaviour, porosity, cracking, incomplete fusion and aluminium–copper intermetallic compounds (IMCs). Weld quality is therefore treated as multidimensional: geometry, mechanical behaviour, metallurgical features and electrical performance are distinct outcomes.
 
-> **Current project status (15 November 2026):** Four source datasets have been assembled into an 84-record traceable master table. Notebooks 01–06 cover inspection, cleaning, source-specific standardisation, master construction and quality control. Notebook 07 is the next analysis stage. No trained or validated predictive model is claimed yet.
+> **Current project status (16 November 2026):** Four source datasets have been assembled into an 84-record traceable master table. Data inspection, cleaning, master construction, quality control and source-aware EDA are complete. An initial wobble-welding modelling experiment has been evaluated on 29 records from 17 process conditions using five-fold GroupKFold. Extra Trees showed a promising preliminary result for face bead width (MAE 0.2830 mm; RMSE 0.3979 mm; pooled out-of-fold R² 0.3457), while interface bead width did not outperform the mean baseline. These are exploratory within-source results, not externally validated model performance. See `docs/INITIAL_WOBBLING_MODEL_RESULTS.md`.
 
 ## Current data inventory
 
@@ -90,6 +90,7 @@ Run the notebooks in order. The Colab links open the notebooks from the reposito
 | 05 | Combine source records into a traceable master dataset | [Open in Colab](https://colab.research.google.com/github/aadhilahamath07-pixel/AlCu-Laser-Welding-ML/blob/main/notebooks/05_build_master_experimental_dataset.ipynb) |
 | 06 | Audit the master dataset and create target-specific eligibility subsets | [Open in Colab](https://colab.research.google.com/github/aadhilahamath07-pixel/AlCu-Laser-Welding-ML/blob/main/notebooks/06_master_dataset_quality_control.ipynb) |
 | 07 | Explore distributions, process–response relationships and source-specific correlations | [Open in Colab](https://colab.research.google.com/github/aadhilahamath07-pixel/AlCu-Laser-Welding-ML/blob/main/notebooks/07_exploratory_data_analysis.ipynb) |
+| 08 | Evaluate wobble-welding models with grouped cross-validation, fold diagnostics and out-of-fold plots | [Open in Colab](https://colab.research.google.com/github/aadhilahamath07-pixel/AlCu-Laser-Welding-ML/blob/main/notebooks/08_grouped_ml_evaluation.ipynb) |
 
 Notebook outputs are generated in the Colab runtime and downloaded when instructed. They are not automatically committed to GitHub. Store approved, documented outputs in the appropriate repository folder when ready.
 
@@ -140,7 +141,7 @@ AlCu-Laser-Welding-ML/
 │   ├── processed/           # Standardised source-level data
 │   ├── master/              # Consolidated master outputs
 │   └── README.md            # Data dictionary, provenance and QC notes
-├── notebooks/               # Ordered Colab/Jupyter workflow (01–07)
+├── notebooks/               # Ordered Colab/Jupyter workflow (01–08)
 ├── src/                     # Reusable Python functions (to be developed)
 ├── results/                  # Approved figures, tables and metrics (future)
 ├── requirements.txt
@@ -188,7 +189,7 @@ The repository About description and topics are repository settings; update them
 
 ## Responsible use, licensing and limitations
 
-This is an academic research workflow, not a qualified welding procedure, industrial process-control system or certified engineering recommendation. The current dataset is small and heterogeneous. No predictive accuracy, causal relationship or optimum welding condition is claimed. Any future model must state its training domain, independent study count, uncertainty and limitations, and must be checked against physical experiments and relevant engineering standards.
+This is an academic research workflow, not a qualified welding procedure, industrial process-control system or certified engineering recommendation. The current dataset is small and heterogeneous. The initial wobble face-width result is preliminary and source-specific; it is not external validation, causal evidence or an optimum welding condition. Any future model must state its training domain, independent study count, uncertainty and limitations, and must be checked against physical experiments and relevant engineering standards.
 
 The MIT License applies to original code in this repository. It does not grant permission to redistribute third-party papers, figures, tables or datasets. Check source-specific reuse terms before sharing extracted data.
 
