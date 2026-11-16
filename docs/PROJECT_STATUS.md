@@ -15,6 +15,10 @@
 - Wobble grouped ML evaluation completed in Notebook 08; initial results documented in [INITIAL_WOBBLING_MODEL_RESULTS.md](INITIAL_WOBBLING_MODEL_RESULTS.md).
 - Conventional grouped ML evaluation completed in Notebook 09; results documented in [INITIAL_CONVENTIONAL_MODEL_RESULTS.md](INITIAL_CONVENTIONAL_MODEL_RESULTS.md).
 
+## Repository storage status
+
+The 84-record master dataset and standardised source CSVs have been generated and reviewed in Colab, but are not currently committed to GitHub. The repository tree currently has only `.gitkeep` placeholders in `data/processed/` and `data/master/`. The original source files are present in `data/raw/`. The Notebook 08/09 output ZIPs and their CSV metrics/predictions are also not committed. Therefore, the repository currently preserves the source files, analysis notebooks and written findings, but it is not yet a complete data/output archive. See [data/README.md](../data/README.md) and [NEXT_STEPS.md](NEXT_STEPS.md).
+
 ## Current dataset composition
 
 | Source | Records |
@@ -74,11 +78,15 @@ The evaluation used 21 eligible records from seven power–speed conditions, wit
 
 ## Next research actions
 
-1. Verify the original meaning of the six all-zero conventional records.
-2. Expand the dataset with additional independent, comparable conventional and wobble process conditions.
-3. Complete source metadata (material grades/thicknesses, joint geometry, beam/focus details, laser mode, shielding and measurement protocol).
-4. Seek external validation on an independent study before making generalization claims.
-5. Keep source-specific datasets separate unless comparability is demonstrated. Do not claim causal effects, an optimum process window or production readiness from the current small datasets.
+1. Archive the reviewed 84-record master dataset, standardised source CSVs, audit and data dictionary in `data/` after checking redistribution permissions and recording exact source provenance.
+2. Add the approved Notebook 08/09 metrics and out-of-fold predictions to a versioned `results/` location, with the notebook version and input-data checksum/version recorded.
+3. Verify the original meaning of the six all-zero conventional records.
+4. Expand the dataset with additional independent, comparable conventional and wobble process conditions.
+5. Complete source metadata (material grades/thicknesses, joint geometry, beam/focus details, laser mode, shielding and measurement protocol).
+6. Seek external validation on an independent study before making generalization claims.
+7. Keep source-specific datasets separate unless comparability is demonstrated. Do not claim causal effects, an optimum process window or production readiness from the current small datasets.
+
+See the detailed [next-step checklist](NEXT_STEPS.md).
 
 ## Research integrity rules
 
