@@ -11,7 +11,7 @@
 - Master dataset assembled: 84 records across four source groups.
 - Notebook 06 QC output reviewed: 84 records, 45 columns, no duplicate master IDs, duplicate source-record keys or exact duplicate rows.
 - Target-specific eligibility flags and source-specific modelling subsets generated.
-- Notebook 07 source-aware exploratory data analysis completed.
+- Notebook 07 source-aware exploratory data analysis completed and subsequently refined in GitHub: target-specific eligibility is now applied to process–response correlations, and target value coverage/concentration is audited separately.
 - First wobble-welding ML comparison completed using 29 complete records from 17 process conditions.
 - Initial results documented in [INITIAL_WOBBLING_MODEL_RESULTS.md](INITIAL_WOBBLING_MODEL_RESULTS.md).
 - Notebook 08 added for fold-wise stability checks and out-of-fold diagnostics.
@@ -74,11 +74,11 @@ Five-fold GroupKFold validation grouped rows by process condition. Pooled out-of
 
 ## Next research actions
 
-1. Complete fold-wise performance and residual diagnostics with Notebook 08.
-2. Decide whether face bead width performance is sufficiently stable to retain as an exploratory model.
-3. Review data coverage and comparable target availability in the conventional dataset before selecting a second source-specific modelling experiment.
-4. Do not pool different source groups without verifying material grades, thicknesses, joint configuration, laser setup and measurement definitions.
-5. Improve source metadata and record exact publication table/page locations before manuscript preparation.
+1. Re-run the updated Notebook 07 so the exported EDA tables include eligibility-aware correlations and target distribution/concentration audits.\n2. Complete fold-wise performance and residual diagnostics with Notebook 08.
+3. Decide whether face bead width performance is sufficiently stable to retain as an exploratory model.
+4. Review data coverage and comparable target availability in the conventional dataset before selecting a second source-specific modelling experiment.
+5. Do not pool different source groups without verifying material grades, thicknesses, joint configuration, laser setup and measurement definitions.
+6. Improve source metadata and record exact publication table/page locations before manuscript preparation.
 
 ## Research integrity rules
 
