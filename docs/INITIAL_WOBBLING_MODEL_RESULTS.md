@@ -1,7 +1,7 @@
 # Initial wobble-welding model evaluation
 
 **Updated:** 16 November 2026  
-**Status:** Preliminary exploratory result; not a validated predictive model.
+**Status:** Preliminary exploratory result with five-fold grouped validation; not a validated predictive model.
 
 ## Dataset used
 
@@ -24,7 +24,7 @@ The initial modelling subset was created from the Notebook 06 audited master dat
 - `bead_width_face_mm`
 - `bead_width_interface_mm`
 
-The 29 records cover 17 of the 18 original wobble process conditions. Replicates from a process condition were kept together using GroupKFold validation. Five folds were used. This avoids placing repeated records from the same condition in both training and validation partitions.
+The 29 records cover 17 of the 18 original wobble process conditions. Replicates from a process condition were kept together using GroupKFold validation. Five folds were used, with 3–4 held-out conditions per fold. This avoids placing repeated records from the same condition in both training and validation partitions.
 
 ## Initial cross-validation results
 
@@ -53,10 +53,27 @@ The reported metrics below are pooled out-of-fold predictions from five-fold Gro
 - Validation: `GroupKFold(n_splits=5)`, grouped by the three process inputs combined into `condition_group`.
 - Metrics: pooled out-of-fold MAE, RMSE and R².
 
+## Fold-wise stability results
+
+Notebook 08 was subsequently run on the same 29-row CSV. The following values are the mean ± standard deviation across its five validation folds. Fold-level R² is especially unstable because each fold contains only 5–6 test records.
+
+| Target | Model | Fold MAE mean ± SD (mm) | Fold RMSE mean ± SD (mm) | Fold R² mean ± SD |
+|---|---|---:|---:|---:|
+| Face bead width | Mean baseline | 0.3953 ± 0.0996 | 0.5008 ± 0.1745 | -2.0522 ± 3.3053 |
+| Face bead width | Ridge regression | 0.3921 ± 0.1377 | 0.4866 ± 0.2041 | -2.1189 ± 3.4930 |
+| Face bead width | Extra Trees | 0.2795 ± 0.1198 | 0.3603 ± 0.1764 | -0.5447 ± 1.8890 |
+| Interface bead width | Mean baseline | 0.1017 ± 0.0738 | 0.1208 ± 0.0928 | -0.4144 ± 0.6184 |
+| Interface bead width | Ridge regression | 0.1224 ± 0.0565 | 0.1474 ± 0.0769 | -2.1761 ± 2.3371 |
+| Interface bead width | Extra Trees | 0.1080 ± 0.0517 | 0.1485 ± 0.0808 | -3.3298 ± 4.6045 |
+
+The fold-wise summary supports a cautious interpretation: Extra Trees has lower average fold MAE for face bead width than the mean baseline, but its fold-level R² varies substantially and has a negative mean. For interface bead width, the mean baseline has the lowest average fold MAE and RMSE. Therefore, face width remains exploratory, while interface width is not currently supported as a predictive target.
+
+Notebook 08 also generated out-of-fold observed-versus-predicted and residual plots for the face-width Extra Trees model, together with `wobbling_fold_metrics.csv`, `wobbling_pooled_oof_metrics.csv`, and `wobbling_oof_predictions.csv` in `notebook08_grouped_ml_outputs.zip`. The plots are diagnostic, not independent validation.
+
 ## Limitations and required checks
 
-1. Only 29 records and 17 independent process-condition groups are available. Five folds therefore have small validation groups, and scores can be sensitive to the particular split.
-2. The five-fold pooled scores do not show whether model performance is consistent across folds. Fold-wise metrics and out-of-fold residual plots are required next.
+1. Only 29 records and 17 independent process-condition groups are available. Each validation fold contains only 3–4 held-out conditions, making estimates sensitive to the split.
+2. Fold-level R² values are highly variable and can be misleading with only 5–6 test records per fold. Interpret MAE/RMSE alongside pooled out-of-fold metrics and the raw predictions.
 3. This is validation across process conditions within one source dataset, not external validation across independent publications or laboratories.
 4. The feature set is limited to three reported wobble process variables. Material grade/thickness, joint configuration, beam setup and other potentially relevant variables are not represented here.
 5. Do not use these models to recommend production settings or claim an optimum welding window.
@@ -64,10 +81,10 @@ The reported metrics below are pooled out-of-fold predictions from five-fold Gro
 
 ## Current research decision
 
-- Retain **face bead width** as the primary exploratory modelling target for this wobble dataset.
-- Keep **interface bead width** as a secondary target, but report that the current models did not outperform the mean baseline.
+- Retain **face bead width** as the primary exploratory modelling target for this wobble dataset. Extra Trees improves on the baseline in pooled MAE/RMSE and in mean fold MAE, but fold-level R² is unstable; describe this as preliminary evidence only.
+- Keep **interface bead width** as a secondary descriptive target, not a successful prediction target: the mean baseline outperforms both candidate models on pooled MAE/RMSE and average fold MAE/RMSE.
 - Do not pool these wobble records with conventional welding, Shin et al. or Lee et al. records.
-- Next, inspect fold-wise performance, residuals and observed-versus-predicted values using Notebook 08. Then decide whether this dataset supports further model development or whether more comparable experimental data are needed.
+- The next priority is to improve independent evidence and feature coverage, not to over-tune these 29 records. Seek additional comparable wobble-welding measurements and verify experimental metadata.
 
 ## Reproducibility
 
