@@ -17,7 +17,7 @@
 
 ## Repository storage status
 
-The 84-record master dataset and standardised source CSVs have been generated and reviewed in Colab, but are not currently committed to GitHub. The repository tree currently has only `.gitkeep` placeholders in `data/processed/` and `data/master/`. The original source files are present in `data/raw/`. The Notebook 08/09 output ZIPs and their CSV metrics/predictions are also not committed. Therefore, the repository currently preserves the source files, analysis notebooks and written findings, but it is not yet a complete data/output archive. See [data/README.md](../data/README.md) and [NEXT_STEPS.md](NEXT_STEPS.md).
+The 84-record master dataset and standardised source CSVs have been generated and reviewed in Colab, but are not currently committed to GitHub. The repository folder structure and README guidance for `data/processed/`, `data/master/` and `results/` are now in place; this is a documentation/structure completion, not a claim that the generated data files have been uploaded. The repository tree currently has only `.gitkeep` placeholders in `data/processed/` and `data/master/`. The original source files are present in `data/raw/`. The Notebook 08/09 output ZIPs and their CSV metrics/predictions are also not committed. Therefore, the repository currently preserves the source files, analysis notebooks and written findings, but it is not yet a complete data/output archive. See [data/README.md](../data/README.md) and [NEXT_STEPS.md](NEXT_STEPS.md).
 
 ## Current dataset composition
 
