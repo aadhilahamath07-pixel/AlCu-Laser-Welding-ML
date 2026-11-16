@@ -14,8 +14,9 @@ Before adding generated files, check source redistribution permissions, preserve
 ## Directory layout
 
 - `raw/`: source files as received or extracted. Do not edit these in place.
-- `processed/`: standardised source-level CSV files produced by the cleaning notebooks.
-- `master/`: consolidated master dataset and audited versions, once reviewed and approved.
+- `processed/`: standardised source-level CSV files produced by the cleaning notebooks; see [processed/README.md](processed/README.md).
+- `master/`: consolidated master dataset and audited versions, once reviewed and approved; see [master/README.md](master/README.md).
+- `../results/`: reviewed EDA and model outputs; see [results/README.md](../results/README.md).
 - `README.md`: data schema, provenance and handling rules.
 
 Notebook outputs currently download to the Colab runtime; they are not automatically copied into this repository. Commit a generated CSV only after checking provenance, licensing and the corresponding audit.
