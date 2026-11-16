@@ -2,6 +2,15 @@
 
 This directory stores source-derived data for the Al–Cu laser-welding research project. Keep original files, standardised files and consolidated datasets in separate locations.
 
+## Current repository storage status (16 November 2026)
+
+- `raw/` contains the four original source-derived files used in the current workflow.
+- `processed/` and `master/` currently contain only `.gitkeep` placeholders; no generated CSV dataset is committed there yet.
+- The 84-record master dataset and source-standardised CSVs were generated in Colab and used for the QC/EDA/ML analyses, but the generated files have not yet been added to this repository.
+- Notebook 08 and Notebook 09 output ZIPs were downloaded from Colab and analysed, but their CSV predictions/metrics are not committed here.
+
+Before adding generated files, check source redistribution permissions, preserve the exact input versions used for each model run, and include an audit/data dictionary. Do not treat the fact that a dataset was generated in a Colab session as proof that it is archived in GitHub.
+
 ## Directory layout
 
 - `raw/`: source files as received or extracted. Do not edit these in place.
